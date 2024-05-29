@@ -5,8 +5,10 @@ import (
 	"fullcycle-auction_go/configuration/rest_err"
 	"fullcycle-auction_go/internal/infra/api/web/validation"
 	"fullcycle-auction_go/internal/usecase/auction_usecase"
-	"github.com/gin-gonic/gin"
+	"log"
 	"net/http"
+
+	"github.com/gin-gonic/gin"
 )
 
 type AuctionController struct {
@@ -21,6 +23,8 @@ func NewAuctionController(auctionUseCase auction_usecase.AuctionUseCaseInterface
 
 func (u *AuctionController) CreateAuction(c *gin.Context) {
 	var auctionInputDTO auction_usecase.AuctionInputDTO
+
+	log.Println("chegou no controller")
 
 	if err := c.ShouldBindJSON(&auctionInputDTO); err != nil {
 		restErr := validation.ValidateErr(err)
